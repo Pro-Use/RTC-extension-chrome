@@ -511,7 +511,7 @@ var update_icon_text = () => {
     chrome.alarms.getAll(function (alarms) {
         alarm_times = [];
         alarms.forEach(function(alarm) {
-            if (alarm.name !== "countdown") {
+            if (alarm.name !== "countdown" && alarm.name !== "pv" && alarm.name !== "talk") {
                 alarm_times.push(alarm.scheduledTime);
             }
         });
