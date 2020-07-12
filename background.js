@@ -7,6 +7,7 @@ chrome.runtime.onInstalled.addListener(function () {
         console.log("Cleared popup cache");
     });
     create_alarms();
+    update_icon_text();
 });
 
 // Clear Window cache + create alarms on restart
@@ -15,6 +16,7 @@ chrome.runtime.onStartup.addListener(function () {
         console.log("Cleared popup cache");
     });
     create_alarms();
+    update_icon_text();
 });
 
 // Closed window listener
