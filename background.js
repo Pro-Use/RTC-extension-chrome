@@ -506,6 +506,11 @@ var create_alarms = () => {
         });
     });
  };
+ 
+ // recreate alarms on idle state change:
+ chrome.idle.onStateChanged.addListener(function (){
+     create_alarms();
+ });
 
 var update_icon_text = () => {
     chrome.alarms.getAll(function (alarms) {

@@ -2,7 +2,7 @@
     "name": "Real Time Constraints",
     "version": "1.0",
     "description": "Arebyte - Real Time Constraints. An exhibition as an extension.",
-    "permissions": ["storage", "alarms"],
+    "permissions": ["storage", "alarms", "idle"],
     "background": {
       "scripts": ["background.js"],
       "persistent": false
