@@ -414,8 +414,8 @@ libbyheaney = () => {
 joelsimon = async () => {
     const { availWidth:w, availHeight:h } = window.screen;
     const dims = [.2*w,.1*h, .6*w, .9*h].map(Math.floor);
-    const id = await openWindow(dims, false, "popups/joelsimon/artbreeder.html")
-    storePopupID(id)
+    const id = await openWindow(dims, false, "popups/joelsimon/artbreeder.html");
+    storePopupID(id);
 };
 
 

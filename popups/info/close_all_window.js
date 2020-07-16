@@ -24,6 +24,7 @@ function closeAll() {
         });
         chrome.storage.local.set({popups: []});
     });
+    window.close();
 }
 
 var close_all_button = document.getElementById("close_all");
