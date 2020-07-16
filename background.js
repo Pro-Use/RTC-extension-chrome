@@ -20,6 +20,12 @@ chrome.runtime.onStartup.addListener(function () {
     update_icon_text();
 });
 
+// Update alarms on system idle update
+chrome.idle.onStateChanged.addListener(function() {
+   create_alarms(); 
+});
+
+
 // Closed window listener
 chrome.windows.onRemoved.addListener(function(id) {
     chrome.storage.local.get(['popups'], function(result) {
