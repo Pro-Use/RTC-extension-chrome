@@ -21,14 +21,6 @@ buttons.forEach(function(currentBtn){
   };
 });
 
-// Close all button handler
-var closeall = document.getElementById('closeAll');
-
-closeall.onclick = () => closeAll();
-
-
-// Close all popups
-
 function closeAll() {
     chrome.storage.local.get(['popups'], function(result) {
         let popups = result.popups;
@@ -67,6 +59,36 @@ function logKey(e) {
       }
   }
 }
+
+//pause state
+var pause_button = document.getElementById("pause");
+
+chrome.storage.local.get(['paused'], function(result) {
+    let paused = result.paused;
+    console.log("paused state:" + paused);
+    if (paused === null || paused === false) {
+        console.log("Unpaused");
+        pause_button.checked = true;
+        document.getElementById("all_artists").style.display = "block";
+        document.getElementById("paused").style.display = "none";
+    } else {
+        console.log("Paused");
+        pause_button.checked = false;
+        document.getElementById("all_artists").style.display = "none";
+        document.getElementById("paused").style.display = "block";
+    }
+});
+
+pause_button.addEventListener( 'change', function() {
+    port.postMessage("pause_toggle");
+    if (pause_button.checked === true) {
+        location.reload();
+    } else {
+        document.getElementById("all_artists").style.display = "none";
+        document.getElementById("paused").style.display = "block";
+    }
+});
+
 
 var work_info = {
     gretchenandrew:["Gretchen Andrew","The Next American President"],

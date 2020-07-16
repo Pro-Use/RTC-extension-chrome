@@ -6,6 +6,7 @@ chrome.runtime.onInstalled.addListener(function () {
     chrome.storage.local.remove("popups", function () {
         console.log("Cleared popup cache");
     });
+    chrome.storage.local.set({paused: false});
     create_alarms();
     update_icon_text();
 });
@@ -57,6 +58,8 @@ chrome.windows.onRemoved.addListener(function(id) {
                 arebyteWindow();          
            } else if (msg === 'popup-live'){
                liveWindow();
+           } else if (msg === 'pause_toggle'){
+               pause_toggle();
            } else {
                 chrome.storage.local.set({last_triggered: msg});
                 await infoWindow(msg);
@@ -79,6 +82,26 @@ chrome.windows.onRemoved.addListener(function(id) {
            } 
       });
  });
+ 
+ //Pause
+function pause_toggle() {
+    chrome.storage.local.get(['paused'], function(result) {
+        paused = result.paused;
+        if (paused === null || paused === false) {
+            chrome.storage.local.set({paused: true});
+            chrome.alarms.clearAll();
+            chrome.browserAction.setBadgeText({text:""});
+            console.log("Paused");
+        } else {
+            chrome.storage.local.set({paused: false});
+            create_alarms();
+            update_icon_text();
+            console.log("Unpaused");
+            
+        }
+    });
+    
+ }
  
  //Popup functions
  
