@@ -22,7 +22,11 @@ chrome.runtime.onStartup.addListener(function () {
 
 // Update alarms on system idle update
 chrome.idle.onStateChanged.addListener(function() {
-   create_alarms(); 
+    chrome.storage.local.get(['paused'], function(result) {
+        if (result.paused === false) {
+            create_alarms(); 
+        }
+    });
 });
 
 
