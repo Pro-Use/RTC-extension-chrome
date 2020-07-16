@@ -22,9 +22,8 @@ function closeAll() {
                 chrome.windows.remove(info_wid_id);
             }
         });
-        chrome.storage.local.set({popups: []});
+        chrome.storage.local.set({popups: []}, function(){window.close();});
     });
-    window.close();
 }
 
 var close_all_button = document.getElementById("close_all");
