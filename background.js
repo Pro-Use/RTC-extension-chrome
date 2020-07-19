@@ -16,8 +16,12 @@ chrome.runtime.onStartup.addListener(function () {
     chrome.storage.local.remove("popups", function () {
         console.log("Cleared popup cache");
     });
-    create_alarms();
-    update_icon_text();
+    chrome.storage.local.get(['paused'], function(result) {
+        if (result.paused === false) {
+            create_alarms();
+            update_icon_text();
+        }
+    });
 });
 
 // Update alarms on system idle update
