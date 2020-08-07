@@ -512,9 +512,13 @@ var create_alarms = () => {
     var d = new Date();
     var n = d.getTimezoneOffset() / 60;
     var pv = new Date(Date.UTC(2020, 6, 23, 18 + n, 30));
-    chrome.alarms.create("pv", {when:pv.getTime()});
+    if (d.getTime() < pv.getTime()) {
+        chrome.alarms.create("pv", {when:pv.getTime()});
+    }
     var talk = new Date(Date.UTC(2020, 7, 6, 19 + n, 00));
-    chrome.alarms.create("talk", {when:talk.getTime()});
+    if (d.getTime() < talk.getTime()) {
+        chrome.alarms.create("talk", {when:talk.getTime()});
+    }
     // log
     chrome.alarms.getAll(function(alarms) {
         alarms.forEach(function(alarm) {
